@@ -4,8 +4,49 @@ import { Button } from '@/components/ui/button.tsx'
 import { Link, useParams } from 'react-router-dom'
 import { User } from 'lucide-react'
 
+interface Farmer {
+  firstname: string
+  middlename: string
+  lastname: string
+  birthdate: string
+  gender: string
+  sitio: string
+  baranggay: string
+  municipality: string
+  phoneNumber: string
+  geographical: Array<{
+    farmLocation: string
+    farmArea: number
+    farmCategory: string
+  }>
+  id: string
+  production: Array<{
+    cropPlanted: string
+    datePlanted: Date
+    areaPlanted: number
+    existence: string
+    status: string
+    id: string
+  }>
+}
+
+const defaultFarmer: Farmer = {
+  firstname: '',
+  middlename: '',
+  lastname: '',
+  birthdate: '',
+  gender: '',
+  sitio: '',
+  baranggay: '',
+  municipality: '',
+  phoneNumber: '',
+  geographical: [],
+  id: '',
+  production: [],
+}
+
 const FarmerProfile = () => {
-  const [farmer, setFarmer] = useState({})
+  const [farmer, setFarmer] = useState<Farmer | null>(defaultFarmer)
   const API_URL = 'https://capstone.prototype.nielmascarinas.me'
   // const [id, setId] = useState('')
 

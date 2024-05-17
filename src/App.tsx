@@ -1,5 +1,4 @@
 import FarmerProfile from '@/components/FarmerProfile.tsx'
-import FarmLocation from '@/components/FarmLocation.tsx'
 import { Routes, Route } from 'react-router-dom'
 import ViewProduction from '@/components/ViewProduction.tsx'
 import ListOfFarmers from '@/components/ListOfFarmers.tsx'

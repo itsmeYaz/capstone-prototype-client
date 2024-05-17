@@ -21,7 +21,7 @@ const ListOfFarmers = () => {
     <div>
       <h2>List of Farmers</h2>
       <ul>
-        {farmersId.map((farmer, index) => (
+        {farmersId.map((farmer) => (
           <Link to={`/farmer/${farmer.id}`}>
             <li className="flex cursor-pointer mb-2">
               <User />

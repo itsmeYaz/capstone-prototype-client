@@ -24,8 +24,34 @@ import {
 import { Button } from '@/components/ui/button.tsx'
 import { Plus, Trash } from 'lucide-react'
 
+interface Harvest {
+  date: string
+  quantity: number
+  id: string
+}
+
+interface ProductionData {
+  cropPlanted: string
+  datePlanted: string
+  areaPlanted: number
+  existence: string
+  dateHarvest: string
+  status: string
+  harvests: Harvest[]
+}
+
+const defaultData: ProductionData = {
+  cropPlanted: '',
+  datePlanted: '',
+  areaPlanted: 0,
+  existence: '',
+  dateHarvest: '',
+  status: '',
+  harvests: [],
+}
+
 const ViewProduction = () => {
-  const [data, setData] = useState({})
+  const [data, setData] = useState<ProductionData>(defaultData)
   const { id } = useParams()
   const {
     cropPlanted,
@@ -52,7 +78,7 @@ const ViewProduction = () => {
   function handleDelete(id) {
     axios
       .delete(`https://capstone.prototype.nielmascarinas.me/api/harvest/${id}`)
-      .then((res) => {
+      .then(() => {
         // Create a new array that does not include the deleted item
         const updatedHarvests = data.harvests.filter((item) => item.id !== id)
 
