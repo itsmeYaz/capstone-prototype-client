@@ -141,6 +141,7 @@ const AddProduction = () => {
                       field.onChange(e)
                       setInputData({
                         ...inputData,
+                        // @ts-ignore
                         areaPlanted: Number(e.target.value),
                       })
                     }}

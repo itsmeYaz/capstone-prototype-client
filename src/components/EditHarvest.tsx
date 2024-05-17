@@ -74,7 +74,7 @@ const EditHarvest = () => {
         `https://capstone.prototype.nielmascarinas.me/api/harvest/${id}`,
         data,
       )
-      .then((res) => {
+      .then(() => {
         navigate(`/production/${data.productionId}`)
       })
       .catch((err) => console.log(err))

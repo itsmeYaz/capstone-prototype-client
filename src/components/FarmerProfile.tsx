@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
-import { Input } from '@/components/ui/input.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { Link, useParams } from 'react-router-dom'
 import { User } from 'lucide-react'
@@ -65,6 +64,7 @@ const FarmerProfile = () => {
         </p>
       </div>
       <h2 className="mt-5 border-t-2 border-b-2 p-2">Farms Owned</h2>
+
       {farmer.geographical &&
         farmer.geographical.map((farm, index) => (
           <div key={index} className="text-2xl">
@@ -74,14 +74,12 @@ const FarmerProfile = () => {
             <p>Farm Category: {farm.farmCategory}</p>
           </div>
         ))}
-
       <h2 className="mt-5 border-t-2 border-b-2 p-2">
         Crops Productions
         <Button asChild className="mx-2" variant="secondary" size="sm">
           <Link to={`/production/create/${farmer.id}`}>+ Add Production</Link>
         </Button>
       </h2>
-
       {farmer.production &&
         farmer.production.map((crop, index) => (
           <div key={index} className="mb-5">
