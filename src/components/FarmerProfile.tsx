@@ -108,8 +108,8 @@ const FarmerProfile = () => {
 
       {farmer.geographical &&
         farmer.geographical.map((farm, index) => (
-          <div key={index} className="text-2xl">
-            <h3 className="font-bold">Farm {index + 1}</h3>
+          <div key={index}>
+            <h3>Farm {index + 1}</h3>
             <p>Farm Location: {farm.farmLocation}</p>
             <p>Farm Area: {farm.farmArea} m&sup2;</p>
             <p>Farm Category: {farm.farmCategory}</p>
