@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Button } from '@/components/ui/button.tsx'
 import { Link, useParams } from 'react-router-dom'
@@ -52,14 +52,16 @@ const FarmerProfile = () => {
 
   const { id } = useParams()
 
-  axios
-    .get(`${API_URL}/api/farmers/${id}`)
-    .then((res) => {
-      setFarmer(res.data)
-    })
-    .catch((error) => {
-      console.error('Error fetching data: ', error)
-    })
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/api/farmers/${id}`)
+      .then((res) => {
+        setFarmer(res.data)
+      })
+      .catch((error) => {
+        console.error('Error fetching data: ', error)
+      })
+  }, [id])
 
   console.log(id)
   return (
@@ -104,7 +106,12 @@ const FarmerProfile = () => {
           <span className="text-green-500">{farmer.phoneNumber}</span>
         </p>
       </div>
-      <h2 className="mt-5 border-t-2 border-b-2 p-2">Farms Owned</h2>
+      <h2 className="mt-5 border-t-2 border-b-2 p-2">
+        {farmer.firstname} Farms Owned
+        <Button asChild className="mx-2" variant="secondary" size="sm">
+          <Link to={`/create-geographical/${id}`}>+ Add Farm</Link>
+        </Button>
+      </h2>
 
       {farmer.geographical &&
         farmer.geographical.map((farm, index) => (
@@ -116,7 +123,7 @@ const FarmerProfile = () => {
           </div>
         ))}
       <h2 className="mt-5 border-t-2 border-b-2 p-2">
-        Crops Productions
+        {farmer.firstname} Crops Productions
         <Button asChild className="mx-2" variant="secondary" size="sm">
           <Link to={`/production/create/${farmer.id}`}>+ Add Production</Link>
         </Button>
