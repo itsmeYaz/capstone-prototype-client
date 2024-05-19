@@ -24,6 +24,7 @@ const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
 
 const CropsAnalytics = () => {
   const [data, setData] = useState([])
+  const [keys, setKeys] = useState([])
   useEffect(() => {
     axios
       .get(
@@ -39,9 +40,21 @@ const CropsAnalytics = () => {
         )
 
         setData(transformedData)
+
+        // Update the keys state variable
+        if (transformedData.length > 0) {
+          const keys = Array.from(
+            new Set(
+              transformedData.flatMap((item) =>
+                Object.keys(item).filter((key) => key !== 'date'),
+              ),
+            ),
+          )
+          console.log('Keys:', keys) // Log the keys
+          setKeys(keys)
+        }
       })
   }, [])
-
   return (
     <>
       <h2>Sample Analytics of Crop Production</h2>
@@ -64,13 +77,14 @@ const CropsAnalytics = () => {
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
         <Legend />
-        <Bar dataKey="Tomatoes" fill="#8884d8" barSize={20} />
-        <Bar dataKey="Corn" fill="#82ca9d" barSize={20} />
-        <Bar dataKey="Carrot" fill="#ffc658" barSize={20} />
-        <Bar dataKey="Cacao" fill="#ff7300" barSize={20} />
-        <Bar dataKey="Potato" fill="#387908" barSize={20} />
-        <Bar dataKey="Peanut" fill="#a4de6c" barSize={20} />
-        <Bar dataKey="Banana" fill="#d0ed57" barSize={20} />
+        {keys.map((key, index) => (
+          <Bar
+            key={index}
+            dataKey={key}
+            fill={`#${((Math.random() * 0xffffff) << 0).toString(16)}`}
+            barSize={20}
+          />
+        ))}
       </BarChart>
     </>
   )
