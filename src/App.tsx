@@ -6,6 +6,7 @@ import AddHarvest from '@/components/AddHarvest.tsx'
 import EditHarvest from '@/components/EditHarvest.tsx'
 import AddProduction from '@/components/AddProduction.tsx'
 import AddGeographical from '@/components/AddGeographical.tsx'
+import CropsAnalytics from './components/CropsAnalytics'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/production/create/:id" element={<AddProduction />} />
         <Route path="/create/:id" element={<AddHarvest />} />
         <Route path="/update/:id" element={<EditHarvest />} />
+        <Route path="/analytics" element={<CropsAnalytics />} />
       </Routes>
     </main>
   )
