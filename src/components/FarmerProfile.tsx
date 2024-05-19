@@ -3,6 +3,17 @@ import axios from 'axios'
 import { Button } from '@/components/ui/button.tsx'
 import { Link, useParams } from 'react-router-dom'
 import { User } from 'lucide-react'
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog'
 
 interface Farmer {
   firstname: string
@@ -63,10 +74,25 @@ const FarmerProfile = () => {
       })
   }, [id])
 
+  function handleDelete(id) {
+    axios
+      .delete(`${API_URL}/api/production/${id}`)
+      .then(() => {
+        console.log('item deleted')
+        setFarmer((prevFarmer) => ({
+          ...prevFarmer,
+          production: prevFarmer.production.filter((item) => item.id !== id),
+        }))
+      })
+      .catch((error) => {
+        console.error('Error deleting data: ', error)
+      })
+  }
+
   console.log(id)
   return (
     <>
-      <h2 className="flex mb-6 justify-center">
+      <h2 className="flex justify-center mb-6">
         <User />
         {farmer.firstname}'s Profile
       </h2>
@@ -106,7 +132,7 @@ const FarmerProfile = () => {
           <span className="text-green-500">{farmer.phoneNumber}</span>
         </p>
       </div>
-      <h2 className="mt-5 border-t-2 border-b-2 p-2">
+      <h2 className="p-2 mt-5 border-t-2 border-b-2">
         {farmer.firstname} Farms Owned
         <Button asChild className="mx-2" variant="secondary" size="sm">
           <Link to={`/create-geographical/${id}`}>+ Add Farm</Link>
@@ -122,7 +148,7 @@ const FarmerProfile = () => {
             <p>Farm Category: {farm.farmCategory}</p>
           </div>
         ))}
-      <h2 className="mt-5 border-t-2 border-b-2 p-2">
+      <h2 className="p-2 mt-5 border-t-2 border-b-2">
         {farmer.firstname} Crops Productions
         <Button asChild className="mx-2" variant="secondary" size="sm">
           <Link to={`/production/create/${farmer.id}`}>+ Add Production</Link>
@@ -131,7 +157,7 @@ const FarmerProfile = () => {
       {farmer.production &&
         farmer.production.map((crop, index) => (
           <div key={index} className="mb-5">
-            <h3 className="border-t-2 border-b-2 p-2">Crop {index + 1}</h3>
+            <h3 className="p-2 border-t-2 border-b-2">Crop {index + 1}</h3>
             <p>Crop Planted: {crop.cropPlanted}</p>
             <p>
               Date Planted:{' '}
@@ -148,6 +174,28 @@ const FarmerProfile = () => {
             <Button asChild className="mx-2" size="sm">
               <Link to={`/production/${crop.id}`}>View Production</Link>
             </Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="destructive">Delete</Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Are you sure you want to delete?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    the production and remove author data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>No</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => handleDelete(crop.id)}>
+                    Yes
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         ))}
     </>
