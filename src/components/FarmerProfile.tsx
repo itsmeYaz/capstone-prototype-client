@@ -60,10 +60,12 @@ const FarmerProfile = () => {
   const [farmer, setFarmer] = useState<Farmer | null>(defaultFarmer)
   const API_URL = 'https://capstone.prototype.nielmascarinas.me'
   // const [id, setId] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const { id } = useParams()
 
   useEffect(() => {
+    setIsLoading(true)
     axios
       .get(`${API_URL}/api/farmers/${id}`)
       .then((res) => {
@@ -72,7 +74,14 @@ const FarmerProfile = () => {
       .catch((error) => {
         console.error('Error fetching data: ', error)
       })
+      .finally(() => {
+        setIsLoading(false) // Set loading to false when the fetch completes
+      })
   }, [id])
+
+  if (isLoading) {
+    return <p>Fetching farmer please wait...</p>
+  }
 
   function handleDelete(id) {
     axios
@@ -100,13 +109,13 @@ const FarmerProfile = () => {
         Note: This is the farmers POV when they view their profile
       </h5>
       <div className="grid grid-cols-2 gap-4">
-        <p className="text-2xl">
+        <p>
           Farmer Name:
           <span className="text-green-500">
             {farmer.firstname} {farmer.middlename}. {farmer.lastname}
           </span>
         </p>
-        <p className="text-2xl">
+        <p>
           Birthdate:
           <span className="text-green-500">
             {farmer.birthdate &&
@@ -117,17 +126,17 @@ const FarmerProfile = () => {
               })}
           </span>
         </p>
-        <p className="text-2xl">
+        <p>
           Gender:
           <span className="text-green-500">{farmer.gender}</span>
         </p>
-        <p className="text-2xl">
+        <p>
           Farmer Location:
           <span className="text-green-500">
             {farmer.sitio},{farmer.baranggay},{farmer.municipality}
           </span>
         </p>
-        <p className="text-2xl">
+        <p>
           Phone Number:
           <span className="text-green-500">{farmer.phoneNumber}</span>
         </p>

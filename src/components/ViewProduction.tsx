@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button.tsx'
 import { Plus, Trash } from 'lucide-react'
+import { Coffee } from 'lucide-react'
 
 interface Harvest {
   date: string
@@ -53,6 +54,7 @@ const defaultData: ProductionData = {
 const ViewProduction = () => {
   const [data, setData] = useState<ProductionData>(defaultData)
   const { id } = useParams()
+  const [isLoading, setIsLoading] = useState(false)
   const {
     cropPlanted,
     datePlanted,
@@ -64,6 +66,7 @@ const ViewProduction = () => {
   } = data
 
   useEffect(() => {
+    setIsLoading(true)
     axios
       .get(`https://capstone.prototype.nielmascarinas.me/api/production/${id}`)
       .then((res) => {
@@ -73,7 +76,19 @@ const ViewProduction = () => {
       .catch((error) => {
         console.error('Error fetching data: ', error)
       })
+      .finally(() => {
+        setIsLoading(false) // Set loading to false when the fetch completes
+      })
   }, [])
+
+  if (isLoading) {
+    return (
+      <div className="flex">
+        Preparing production, let's have a coffee...
+        <Coffee />
+      </div>
+    )
+  }
 
   function handleDelete(id) {
     axios
