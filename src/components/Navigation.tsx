@@ -9,7 +9,7 @@ const Navigation = () => {
         <Home />
         Home
       </Link>
-      <Link to={`/analytics`} className="flex">
+      <Link to={`/municipality`} className="flex">
         <UserCheck />
         Admin View
       </Link>
