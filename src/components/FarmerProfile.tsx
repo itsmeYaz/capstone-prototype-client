@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Button } from '@/components/ui/button.tsx'
 import { Link, useParams } from 'react-router-dom'
+import { Skeleton } from '@/components/ui/skeleton'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -81,7 +82,38 @@ const FarmerProfile = () => {
   }, [id])
 
   if (isLoading) {
-    return <p>Fetching farmer please wait...</p>
+    return (
+      <div className="p-6">
+        <div className="flex items-center space-x-6">
+          <Skeleton className="w-24 h-24 rounded-full" />
+          <div>
+            <Skeleton className="w-48 h-4" />
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4 mt-4">
+          <div>
+            <Skeleton className="w-48 h-4" />
+            <Skeleton className="w-full h-4 mt-2" />
+          </div>
+          <div>
+            <Skeleton className="w-48 h-4" />
+            <Skeleton className="w-full h-4 mt-2" />
+          </div>
+          <div>
+            <Skeleton className="w-48 h-4" />
+            <Skeleton className="w-full h-4 mt-2" />
+          </div>
+          <div>
+            <Skeleton className="w-48 h-4" />
+            <Skeleton className="w-full h-4 mt-2" />
+          </div>
+          <div>
+            <Skeleton className="w-48 h-4" />
+            <Skeleton className="w-full h-4 mt-2" />
+          </div>
+        </div>
+      </div>
+    )
   }
 
   function farmerDetails() {
