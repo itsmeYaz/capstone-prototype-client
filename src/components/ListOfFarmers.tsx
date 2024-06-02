@@ -29,14 +29,21 @@ const ListOfFarmers = () => {
   }
 
   return (
-    <div>
-      <h2>Select Farmer</h2>
-      <ul>
+    <div className="p-6 bg-white rounded-lg shadow-md">
+      <h2 className="mb-4 text-2xl font-semibold text-gray-700">
+        Select Farmer
+      </h2>
+      <ul className="divide-y divide-gray-200">
         {farmersId.map((farmer) => (
-          <Link to={`/farmer/${farmer.id}`}>
-            <li className="flex mb-2 cursor-pointer">
-              <User />
-              {farmer.firstname} {farmer.lastname}
+          <Link
+            to={`/farmer/${farmer.id}`}
+            className="block py-4 transition-colors duration-200 hover:bg-gray-100"
+          >
+            <li className="flex items-center space-x-2">
+              <User className="text-green-500" />
+              <span className="text-lg font-medium text-gray-600">
+                {farmer.firstname} {farmer.lastname}
+              </span>
             </li>
           </Link>
         ))}

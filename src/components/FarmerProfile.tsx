@@ -185,16 +185,21 @@ const FarmerProfile = () => {
 
         {farmer.geographical &&
           farmer.geographical.map((farm, index) => (
-            <div key={index} className="p-4 mt-4 bg-gray-100 rounded-lg">
-              <h3 className="text-lg font-bold">Farm {index + 1}</h3>
-              <p>
-                <strong>Location:</strong> {farm.farmLocation}
+            <div key={index} className="p-6 mt-6 bg-white shadow-md rounded-xl">
+              <h3 className="text-2xl font-semibold text-blue-600">
+                Farm {index + 1}
+              </h3>
+              <p className="mt-2 text-gray-700">
+                <strong className="text-gray-900">Location:</strong>{' '}
+                {farm.farmLocation}
               </p>
-              <p>
-                <strong>Area:</strong> {farm.farmArea} m&sup2;
+              <p className="mt-2 text-gray-700">
+                <strong className="text-gray-900">Area:</strong> {farm.farmArea}{' '}
+                m&sup2;
               </p>
-              <p>
-                <strong>Category:</strong> {farm.farmCategory}
+              <p className="mt-2 text-gray-700">
+                <strong className="text-gray-900">Category:</strong>{' '}
+                {farm.farmCategory}
               </p>
             </div>
           ))}
@@ -216,15 +221,16 @@ const FarmerProfile = () => {
 
         {farmer.production &&
           farmer.production.map((crop, index) => (
-            <div key={index} className="p-4 mt-4 bg-gray-100 rounded-lg">
-              <h3 className="text-lg font-bold">
+            <div key={index} className="p-6 mt-6 bg-white shadow-md rounded-xl">
+              <h3 className="text-2xl font-semibold text-blue-600">
                 {crop.cropPlanted} Production
               </h3>
-              <p>
-                <strong>Crop Planted:</strong> {crop.cropPlanted}
+              <p className="mt-2 text-gray-700">
+                <strong className="text-gray-900">Crop Planted:</strong>{' '}
+                {crop.cropPlanted}
               </p>
-              <p>
-                <strong>Date Planted:</strong>
+              <p className="mt-2 text-gray-700">
+                <strong className="text-gray-900">Date Planted:</strong>
                 {crop.datePlanted &&
                   new Date(crop.datePlanted).toLocaleDateString('en-GB', {
                     month: 'long',
@@ -232,16 +238,23 @@ const FarmerProfile = () => {
                     year: 'numeric',
                   })}
               </p>
-              <p>
-                <strong>Area Planted:</strong> {crop.areaPlanted} m&sup2;
+              <p className="mt-2 text-gray-700">
+                <strong className="text-gray-900">Area Planted:</strong>{' '}
+                {crop.areaPlanted} m&sup2;
               </p>
-              <p>
-                <strong>Existence:</strong> {crop.existence}
+              <p className="mt-2 text-gray-700">
+                <strong className="text-gray-900">Existence:</strong>{' '}
+                {crop.existence}
               </p>
-              <p>
-                <strong>Status:</strong> {crop.status}
+              <p className="mt-2 text-gray-700">
+                <strong className="text-gray-900">Status:</strong> {crop.status}
               </p>
-              <Button asChild className="mx-2" size="sm" variant="secondary">
+              <Button
+                asChild
+                className="mx-2 mt-4"
+                size="sm"
+                variant="secondary"
+              >
                 <Link to={`/production/${crop.id}`}>View Production</Link>
               </Button>
               <AlertDialog>
