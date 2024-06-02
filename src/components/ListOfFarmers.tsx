@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { User } from 'lucide-react'
+import Loading from './Loading'
 
 const ListOfFarmers = () => {
   const [farmersId, setFarmersId] = useState([])
@@ -24,8 +25,9 @@ const ListOfFarmers = () => {
   }, [])
 
   if (isLoading) {
-    return <p>Getting farmers...</p>
+    return <Loading />
   }
+
   return (
     <div>
       <h2>Select Farmer</h2>

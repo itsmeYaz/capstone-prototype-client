@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Loading from './Loading'
 
 function useQuery() {
   return new URLSearchParams(useLocation().search)
@@ -59,7 +60,7 @@ function AnalyticsPerMunicipality() {
   }
 
   if (loading) {
-    return <div>Loading...</div>
+    return <Loading />
   }
 
   return (

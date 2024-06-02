@@ -23,7 +23,7 @@ import {
 } from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button.tsx'
 import { Plus, Trash } from 'lucide-react'
-import { Coffee } from 'lucide-react'
+import Loading from './Loading'
 
 interface Harvest {
   date: string
@@ -82,12 +82,7 @@ const ViewProduction = () => {
   }, [])
 
   if (isLoading) {
-    return (
-      <div className="flex">
-        Preparing production, let's have a coffee...
-        <Coffee />
-      </div>
-    )
+    return <Loading />
   }
 
   function handleDelete(id) {

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Button } from './ui/button'
 
 import AnalyticsPerMunicipality from './AnalyticsPerMunicipality'
+import Loading from './Loading'
 
 interface User {
   id: string
@@ -15,10 +16,12 @@ interface User {
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState<User[]>([])
+  const [isLoading, setIsLoading] = useState(false)
   const [activeSection, setActiveSection] = useState('users')
   const API_URL = 'https://capstone.prototype.nielmascarinas.me'
 
   useEffect(() => {
+    setIsLoading(true)
     axios
       .get(`${API_URL}/api/farmers`)
       .then((res) => {
@@ -27,7 +30,14 @@ const AdminDashboard = () => {
       .catch((error) => {
         console.error('Error fetching data: ', error)
       })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }, [])
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   function userList() {
     return (
