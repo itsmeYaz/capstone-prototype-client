@@ -78,7 +78,7 @@ function AnalyticsPerMunicipality() {
         ))}
       </select>
 
-      <BarChart width={1200} height={600} data={data}>
+      <BarChart width={850} height={450} data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="cropPlanted" />
         <YAxis />

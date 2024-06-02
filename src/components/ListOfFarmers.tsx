@@ -28,7 +28,7 @@ const ListOfFarmers = () => {
   }
   return (
     <div>
-      <h2>List of Farmers</h2>
+      <h2>Select Farmer</h2>
       <ul>
         {farmersId.map((farmer) => (
           <Link to={`/farmer/${farmer.id}`}>

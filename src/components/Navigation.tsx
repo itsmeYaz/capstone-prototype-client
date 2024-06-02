@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom'
-import { Home } from 'lucide-react'
+import { User } from 'lucide-react'
 import { UserCheck } from 'lucide-react'
 
 const Navigation = () => {
   return (
     <nav className="flex">
       <Link to={`/`} className="flex mr-5">
-        <Home />
-        Home
+        <User />
+        Farmer
       </Link>
-      <Link to={`/municipality`} className="flex">
+      <Link to={`/admin`} className="flex">
         <UserCheck />
-        Admin View
+        Admin
       </Link>
     </nav>
   )
