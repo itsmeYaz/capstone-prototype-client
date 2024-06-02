@@ -10,8 +10,8 @@ export default defineConfig({
       custom: {
         families: [
           {
-            name: 'Geist',
-            src: './src/assets/fonts/geist/*.ttf',
+            name: 'Poppins',
+            src: './src/assets/fonts/poppins/*.ttf',
           },
         ],
       },
