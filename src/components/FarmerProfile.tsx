@@ -3,6 +3,9 @@ import axios from 'axios'
 import { Button } from '@/components/ui/button.tsx'
 import { Link, useParams } from 'react-router-dom'
 import { Skeleton } from '@/components/ui/skeleton'
+import maleProfile from '../assets/Male.svg'
+import femaleProfile from '../assets/Female.svg'
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -121,9 +124,7 @@ const FarmerProfile = () => {
       <div className="p-6 bg-white rounded-lg shadow">
         <div className="flex items-center space-x-6">
           <img
-            src={
-              'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg'
-            }
+            src={farmer.gender === 'Male' ? maleProfile : femaleProfile}
             alt="Profile"
             className="w-24 h-24 rounded-full"
           />
